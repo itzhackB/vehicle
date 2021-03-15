@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div>
+        <label>Wheel Count</label>
+        <input id="wheelcount" type="text">
+
+
+        <label>Color</label>
+        <input id="color" type="text">
+
+        <button onclick="onSubmit()">Submit</button>
+    </div>
+    <table id="thetable">
+        <thead>
+            <tr>
+                <td>#</td>
+                <td>wheel count</td>
+                <td>color</td>
+            </tr>
+        </thead>
+        <tbody id="results"></tbody>
+    </table>
+    <script>
+
+
+
+//*******************************
+        function clearForm() {
+            color.value = "";
+            wheelcount.value = "";
+        }
+
+        function addNewRowToTable(data, rowNumber) {
+            let row = document.createElement("tr");
+            row.innerHTML = `<td>${rowNumber}</td><td>${data.wheelCount}</td><td>${data.color}</td>`;
+            results.appendChild(row);
+        }
+
+        let carArray = [];
+        let counter = 1;
+        function onSubmit() {
+            var carWheelCount = wheelcount.value;
+            var carColor = color.value;
+            var car = new Car(carWheelCount, carColor);
+            carArray.push(car);
+
+            addNewRowToTable(car, counter);
+
+            counter++;
+            clearForm();
+        }
+
+        class Car {
+            constructor(wheelCount, color) {
+                this.wheelCount = wheelCount;
+                this.color = color;
+            }
+        }
+    </script>
+
+</body>
+
+</html>

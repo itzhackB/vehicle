@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        class Veichel {
+            constructor(type, isCar) {
+                this.type = type;
+                this.isCar = isCar;
+            }
+
+            printVeichelType() {
+                console.log(`type is ${this.type}`)
+            }
+        }
+
+        function printInUpperCase(value) {
+            console.log(value.toUpperCase());
+        }
+
+        class Car extends Veichel {
+            constructor(wheelsCount, engineSize, carColor, name, type) {
+                super(type, true)
+                this.wheelsCount = wheelsCount;
+                this.engineSize = engineSize;
+                this.carColor = carColor;
+                this.name = name;
+            }
+
+            printOneLine() {
+                console.log(Object.entries(this).map(a => `${a[0]}: ${a[1]}`).join(", "));
+            }
+
+            printUpper() {
+                printInUpperCase(this.type)
+            }
+        }
+
+        function getLargestEngine(cars) {
+            let maxNumber = 0;
+            cars.map(car => car.engineSize).forEach(engineSize => {
+                if (engineSize > maxNumber) {
+                    maxNumber = engineSize
+                }
+            })
+            return cars.find(car => car.engineSize === maxNumber);
+        }
+
+        let car1 = new Car(4, 1300, "red", "optimus", "car");
+        car1.printVeichelType();
+
+        let car2 = new Car(6, 2000, "black", "mini", "truck");
+        car2.printOneLine();
+
+        let car3 = new Car(2, 68, "pink", "alpha", "motorcycle");
+
+        car3.printUpper();
+        
+
+        console.log(getLargestEngine([car1, car2, car3]));
+    </script>
+</body>
+
+</html>
